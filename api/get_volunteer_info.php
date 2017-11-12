@@ -1,7 +1,20 @@
 <?php
+/**
+ * Created by PhpStorm.
+ * User: hawkenliu
+ * Date: 2017/11/12
+ * Time: 19:36
+ */
 include "../lib/curl.class.php";
+include "../func/jsonformat.inc.php";
 
-$uid='1865867';
+$uid = isset($_GET['uid'])?$_GET['uid']:'';
+if(!$uid){
+    Response::show(400,'error','参数在错误');
+    exit();
+}
+
+//$uid='1865867';
 
 $curl = new Tool('http://zycq.cn/index/index/volunteer_info?uid='.$uid);
 $fcontents = $curl->cURL($curl->url);
@@ -62,11 +75,17 @@ function get_list($fcontents){
 //获取志愿者基本信息
 function get_volunteerinformation($fcontents)
 {
-    $contents=get_substr($fcontents,'排名','星级奖章');
+    $contents=get_substr($fcontents,'排名','个人动态');
     $user=array();
     $user['name']=get_substr($contents,'姓名：</span>','</p>');
-    $user['sex']=get_substr($contents,'性别：</span>','</p>');
+//    $user['sex']=get_substr($contents,'性别：</span>','</p>');
     $user['volunteer_time']=get_substr($contents,'服务时间：</span> ','</p>');
+    $user['organization']['id']   = get_substr($contents, "oid=", "\" class=\"");
+    $user['organization']['name'] = get_substr($contents, "class=\"black\"> ","</a><br/>");
+    $user['organization']['url']  = "http://zycq.cn".get_substr($contents, "<a href=\"", "\" class=\"");
+//    var_dump($user);
+//    echo $contents;
+//    var_dump($user['organization']);
     return $user;
 }
 function get_volunteer_times($fcontents){
@@ -83,4 +102,3 @@ function get_substr($str, $leftStr, $rightStr)
     return substr($str, $left + strlen($leftStr), $right-$left-strlen($leftStr));
 }
 
-?>
