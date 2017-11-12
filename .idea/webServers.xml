@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="d13952e8-cb5d-4180-b20a-36a114f44aae" name="119.29.223.130" url="http:/119.29.223.130">
+        <fileTransfer host="119.29.223.130" port="21" rootFolder="/yjdata/www/www/volunteer">
+          <advancedOptions>
+            <advancedOptions controlEncoding="utf-8" dataProtectionLevel="Private" />
+          </advancedOptions>
+          <option name="port" value="21" />
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>
