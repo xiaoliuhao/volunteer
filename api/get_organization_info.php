@@ -6,6 +6,7 @@
  * Time: 19:36
  */
 include "../lib/curl.class.php";
+
 include "../func/jsonformat.inc.php";
 
 $uid = isset($_GET['uid'])?$_GET['uid']:'';
