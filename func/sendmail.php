@@ -5,7 +5,7 @@
  * Date: 2017/11/12
  * Time: 17:06
  */
-require_once "/yjdata/www/www/volunteer/lib/email.class.php";
+require_once APP_PATH."/lib/email.class.php";
 // header("Content-type: text/html; charset=utf-8");
 /**
  * @param $smtpemailto 收件人邮箱
@@ -27,7 +27,7 @@ function send_mail($smtpemailto, $mailtitle, $mailcontent, $mailtype='HTML'){
     // $mailtype = "HTML";//邮件格式（HTML/TXT）,TXT为文本邮件
     //************************ 配置信息 ****************************
     $smtp = new smtp($smtpserver,$smtpserverport,true,$smtpuser,$smtppass);//这里面的一个true是表示使用身份验证,否则不使用身份验证.
-    $smtp->debug = true;//是否显示发送的调试信
+    $smtp->debug = false;//是否显示发送的调试信
     $state = $smtp->sendmail($smtpemailto, $smtpusermail,'We重邮', $mailtitle, $mailcontent, $mailtype);
 
     if($state==""){
